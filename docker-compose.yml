@@ -1,0 +1,22 @@
+services:
+  degustare-db:
+    container_name: banco_mysql
+    image: mysql:5.6
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+        reservations:
+          memory: 80M
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootPass*30.
+      - MYSQL_DATABASE=degustare
+      - MYSQL_ROOT_HOST=%
+      - BITNAMI_DEBUG=true
+      - TZ=America/Sao_Paulo
+    volumes:
+      - ./docker-bd/volume_mysql:/var/lib/mysql
