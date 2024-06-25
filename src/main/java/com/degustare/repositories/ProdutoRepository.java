@@ -10,11 +10,7 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
     List<Produto> findByDescricao(String descricao);
-
     Produto findById(int id);
 
-    void delete(Produto produto);
-
-    <Prod extends Produto> Prod save(Prod produto);
 
 }

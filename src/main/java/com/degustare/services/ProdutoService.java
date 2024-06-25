@@ -34,8 +34,8 @@ public class ProdutoService {
         }
     }
 
-    public Produto consultarProdutoPorID(int id) {
-        Optional<Produto> produtoOpt = Optional.ofNullable(produtoRepository.findById(id));
+    public Produto findById (Integer id) {
+        Optional<Produto> produtoOpt = produtoRepository.findById(id);
         if (produtoOpt.isEmpty()) {
             throw new RuntimeException("Produto não encontrado!");
         }
