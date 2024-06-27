@@ -48,6 +48,18 @@ public class ClienteService {
         return clienteList;
     }
 
+    public Cliente alterarCliente (Cliente cliente){
+        Cliente clienteAlterado = new Cliente();
+
+        try{
+            clienteAlterado.setNome(cliente.getNome());
+            clienteAlterado.setTelefone(cliente.getTelefone());
+        } catch (Exception e){
+            throw new RuntimeException("Erro desconhecido. Entre em contato com o Administrador");
+        }
+
+        return clienteAlterado;
+    }
 
     private void validarCliente(Cliente cliente) {
         if (cliente.getId() == null){

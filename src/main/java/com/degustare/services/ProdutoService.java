@@ -55,8 +55,10 @@ public class ProdutoService {
         Produto produtoAlterado = new Produto();
 
         try {
-            produtoAlterado.setId(produto.getId());
             produtoAlterado.setDescricao(produto.getDescricao());
+            if (produto.getDescricao() == null){
+                throw new RuntimeException("O campo descrição não pode ser nulo!");
+            }
             produtoAlterado.setPeso(produto.getPeso());
             produtoAlterado.setPeso(produto.getPeso());
             produtoAlterado.setTamanho(produto.getTamanho());
