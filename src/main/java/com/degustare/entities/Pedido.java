@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,10 +18,17 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "TOTAL")
     private Double total;
-    @ManyToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENTE")
     private Cliente cliente;
+
     @OneToMany
-    private Produto produto;
+    @Column(name = "PRODUTO")
+    private List<Produto> produto;
 }
