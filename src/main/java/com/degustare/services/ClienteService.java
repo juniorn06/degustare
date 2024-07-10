@@ -40,14 +40,14 @@ ClienteService {
         return clienteOpt.get();
     }
 
-    public List<Cliente> findById(String descricao){
-        List<Cliente> clienteList = clienteRepository.findByDescricao(descricao);
+    public List<Cliente> findByNome(String nome){
+        List<Cliente> clienteList = clienteRepository.findByNome(nome);
         if (clienteList.isEmpty()){
             throw new RuntimeException("Cliente não encontrado!");
         }
-
         return clienteList;
     }
+
 
     public Cliente alterarCliente (Cliente cliente){
         Cliente clienteAlterado = new Cliente();

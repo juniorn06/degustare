@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    List<Cliente> findByDescricao(String descricao);
-    Cliente findById(int id);
+    List<Cliente> findByNome(String descricao);
 }
