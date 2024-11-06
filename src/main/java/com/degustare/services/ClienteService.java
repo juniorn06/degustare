@@ -39,7 +39,7 @@ ClienteService {
         }
     }
 
-    public Cliente consultaClientePorId(Integer id){
+    public Cliente obterClientePorId(Integer id){ // TODO devolver 400 not found quando nao encontrar
         Optional<Cliente> clienteOpt = clienteRepository.findById(id);
         if (clienteOpt.isEmpty()){
             throw new RuntimeException("Cliente não encontrado!");
@@ -47,13 +47,18 @@ ClienteService {
         return clienteOpt.get();
     }
 
-    public List<Cliente> findByNome(String nome){
-        List<Cliente> clienteList = clienteRepository.findByNome(nome);
-        if (clienteList.isEmpty()){
-            throw new RuntimeException("Cliente não encontrado!");
-        }
-        return clienteList;
+    public List<Cliente> obterClientes(){
+        List<Cliente> listarCliente = clienteRepository.findAll();
+        return listarCliente;
     }
+
+//    public List<Cliente> obterClientePorNome(String nome){
+//        List<Cliente> clienteList = clienteRepository.obterClientePorNome(nome);
+//        if (clienteList.isEmpty()){
+//            throw new RuntimeException("Cliente não encontrado!");
+//        }
+//        return clienteList;
+//    }
 
 
     public Cliente alterarCliente (Cliente cliente){
@@ -70,9 +75,7 @@ ClienteService {
     }
 
     private void validarCliente(Cliente cliente) {
-        if (cliente.getId() == null){
-            throw new RuntimeException("Campo ID não pode ser nulo!");
-        }
+
         if (cliente.getNome() == null){
             throw new RuntimeException("Campo Nome não pode ser nulo!");
         }
