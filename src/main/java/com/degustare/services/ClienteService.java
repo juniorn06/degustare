@@ -52,13 +52,13 @@ ClienteService {
         return listarCliente;
     }
 
-//    public List<Cliente> obterClientePorNome(String nome){
-//        List<Cliente> clienteList = clienteRepository.obterClientePorNome(nome);
-//        if (clienteList.isEmpty()){
-//            throw new RuntimeException("Cliente não encontrado!");
-//        }
-//        return clienteList;
-//    }
+    public List<Cliente> findByNome(String nome){
+        List<Cliente> clienteList = clienteRepository.findByNome(nome);
+        if (clienteList.isEmpty()){
+            throw new RuntimeException("Cliente não encontrado!");
+        }
+        return clienteList;
+    }
 
 
     public Cliente alterarCliente (Cliente cliente){

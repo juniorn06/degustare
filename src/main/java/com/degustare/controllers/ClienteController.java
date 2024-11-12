@@ -36,4 +36,13 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.obterClientes());
     }
 
+    @GetMapping(path = "/findByNome/{nome}")
+    public ResponseEntity<List> findByNome(@PathVariable String nome){
+        return ResponseEntity.ok().body(clienteService.findByNome(nome));
+    }
+
+    @PutMapping(path = "/alterarCliente/{cliente}")
+    public ResponseEntity<Cliente> alteraCliente(Cliente cliente){
+        return ResponseEntity.ok().body(clienteService.alterarCliente(cliente));
+    }
 }
