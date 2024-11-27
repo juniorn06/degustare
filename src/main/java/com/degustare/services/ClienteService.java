@@ -61,17 +61,16 @@ ClienteService {
     }
 
 
-    public Cliente alterarCliente (Cliente cliente){
-        Cliente clienteAlterado = new Cliente();
+    public Cliente alterarCliente (Cliente clienteAlterado, Integer id){
+        return clienteRepository.findById(id).map(cliente -> {
+            cliente.setNome(clienteAlterado.getNome());
+            cliente.setTelefone(clienteAlterado.getTelefone());
+            return clienteRepository.save(cliente);
+        }).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
+    }
 
-        try{
-            clienteAlterado.setNome(cliente.getNome());
-            clienteAlterado.setTelefone(cliente.getTelefone());
-        } catch (Exception e){
-            throw new RuntimeException("Erro desconhecido. Entre em contato com o Administrador");
-        }
-
-        return clienteAlterado;
+    public void deletarCliente(Integer id){
+        clienteRepository.deleteById(id);
     }
 
     private void validarCliente(Cliente cliente) {

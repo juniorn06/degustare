@@ -41,8 +41,13 @@ public class ClienteController {
         return ResponseEntity.ok().body(clienteService.findByNome(nome));
     }
 
-    @PutMapping(path = "/alterarCliente/{cliente}")
-    public ResponseEntity<Cliente> alteraCliente(Cliente cliente){
-        return ResponseEntity.ok().body(clienteService.alterarCliente(cliente));
+    @PutMapping(path = "/alterarCliente/{id}")
+    public ResponseEntity<Cliente> alteraCliente(@RequestBody Cliente cliente, @PathVariable Integer id){
+        return ResponseEntity.ok().body(clienteService.alterarCliente(cliente, id));
+    }
+
+    @DeleteMapping(path = "deletarCliente/{id}")
+    public void deletarCliente(@PathVariable Integer id){
+        clienteService.deletarCliente(id);
     }
 }
