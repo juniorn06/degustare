@@ -1,6 +1,7 @@
 package com.degustare.services;
 
 import com.degustare.DTO.ResponseDTO;
+import com.degustare.entities.Cliente;
 import com.degustare.entities.Produto;
 import com.degustare.exceptions.validarException;
 import com.degustare.repositories.ProdutoRepository;
@@ -34,7 +35,7 @@ public class ProdutoService {
         }
     }
 
-    public Produto findById (Integer id) {
+    public Produto obterProdutoPorID (Integer id) {
         Optional<Produto> produtoOpt = produtoRepository.findById(id);
         if (produtoOpt.isEmpty()) {
             throw new RuntimeException("Produto não encontrado!");
@@ -42,7 +43,12 @@ public class ProdutoService {
         return produtoOpt.get();
     }
 
-    public List<Produto> findByDescricao(String descricao) {
+    public List<Produto> obterProdutos(){
+        List<Produto> listarProdutos = produtoRepository.findAll();
+        return listarProdutos;
+    }
+
+    public List<Produto> obterProdutoPorDescricao(String descricao) {
         List<Produto> produtoList = produtoRepository.findByDescricao(descricao);
         if (produtoList.isEmpty()){
             throw new RuntimeException("Produto não encontrado!");
@@ -50,25 +56,14 @@ public class ProdutoService {
         return produtoList;
     }
 
-    public Produto alterarProduto(Produto produto) {
-
-        Produto produtoAlterado = new Produto();
-
-        try {
-            produtoAlterado.setDescricao(produto.getDescricao());
-            if (produto.getDescricao() == null){
-                throw new RuntimeException("O campo descrição não pode ser nulo!");
-            }
-            produtoAlterado.setPeso(produto.getPeso());
-            produtoAlterado.setPeso(produto.getPeso());
-            produtoAlterado.setTamanho(produto.getTamanho());
-            produtoAlterado.setIngredientes(produto.getIngredientes());
-        } catch (NullPointerException e){
-            throw new RuntimeException("O campo informado não pode ser nulo");
-        } catch (Exception e) {
-            throw new RuntimeException("Erro desconhecido. Entre em contato com o Administrador.");
-        }
-        return produtoRepository.save(produtoAlterado);
+    public Produto alterarProduto(Produto produtoAlterado, Integer id) {
+        return produtoRepository.findById(id).map(produto -> {
+            produto.setDescricao(produtoAlterado.getDescricao());
+            produto.setUnidade(produtoAlterado.getUnidade());
+            produto.setPreco(produtoAlterado.getPreco());
+            produto.setTamanho(produtoAlterado.getTamanho());
+            return produtoRepository.save(produtoAlterado);
+        }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
     public void deletarProduto(Produto produto) {
@@ -76,13 +71,11 @@ public class ProdutoService {
     }
 
     private void validarProduto(Produto produto) {
-        if (produto.getId() == null){
-            throw new RuntimeException("Campo ID não pode ser nulo!");
-        }
+
         if (produto.getDescricao() == null){
             throw new RuntimeException("Campo Descrição não pode ser nulo!");
         }
-        if (produto.getPeso() == null){
+        if (produto.getUnidade() == null){
             throw new RuntimeException("Campo Peso não pode ser nulo!");
         }
         if (produto.getTamanho() == null){

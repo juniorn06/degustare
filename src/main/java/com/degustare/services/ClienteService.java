@@ -34,7 +34,7 @@ ClienteService {
             String msgResponseDTO = e.getMessage();
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ResponseDTO(null, msgResponseDTO));
         } catch (Exception e){
-            String msgResponseDTO = "Erro inesperado. Entre em contato com o Administrador";
+            String msgResponseDTO = "Erro inesperado. Entre em contato com o Administrador"; //como retornar uma mensagem de erro para o front
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ResponseDTO(null, msgResponseDTO));
         }
     }
@@ -59,7 +59,6 @@ ClienteService {
         }
         return clienteList;
     }
-
 
     public Cliente alterarCliente (Cliente clienteAlterado, Integer id){
         return clienteRepository.findById(id).map(cliente -> {

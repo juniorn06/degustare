@@ -11,18 +11,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PRODUTO")
+@Table(name = "produto")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Integer id;
 
     @Column(name = "DESCRICAO")
     private String descricao;
 
-    @Column(name = "PESO")
-    private Double peso;
+    @Column(name = "UNIDADE")
+    private Integer unidade;
 
     @Column(name = "PRECO")
     private Double preco;
