@@ -20,7 +20,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping(path = "/cadastrarProduto")
-    public ResponseEntity<ResponseDTO> cadastrarProduto(Produto produto){
+    public ResponseEntity<ResponseDTO> cadastrarProduto(@RequestBody Produto produto){
         produtoService.cadastrarProduto(produto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(produto.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -35,4 +35,5 @@ public class ProdutoController {
     public ResponseEntity<List> obterProdutos(){
         return ResponseEntity.ok().body(produtoService.obterProdutos());
     }
+
 }

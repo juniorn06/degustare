@@ -1,5 +1,6 @@
 package com.degustare.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Cliente {
     @Column(name = "TELEFONE")
     private String telefone;
 
-    @OneToMany
-    @Column(name = "PEDIDO")
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
     private List<Pedido> pedido;
 }

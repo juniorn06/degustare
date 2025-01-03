@@ -59,9 +59,8 @@ public class ProdutoService {
     public Produto alterarProduto(Produto produtoAlterado, Integer id) {
         return produtoRepository.findById(id).map(produto -> {
             produto.setDescricao(produtoAlterado.getDescricao());
-            produto.setUnidade(produtoAlterado.getUnidade());
             produto.setPreco(produtoAlterado.getPreco());
-            produto.setTamanho(produtoAlterado.getTamanho());
+            produto.setIngredientes(produtoAlterado.getIngredientes());
             return produtoRepository.save(produtoAlterado);
         }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
@@ -73,16 +72,15 @@ public class ProdutoService {
     private void validarProduto(Produto produto) {
 
         if (produto.getDescricao() == null){
-            throw new RuntimeException("Campo Descrição não pode ser nulo!");
+            throw new RuntimeException("Preencha o campo PREÇO");
         }
-        if (produto.getUnidade() == null){
-            throw new RuntimeException("Campo Peso não pode ser nulo!");
+
+        if (produto.getPreco() == null){
+            throw new RuntimeException("Preencha o campo PREÇO");
         }
-        if (produto.getTamanho() == null){
-            throw new RuntimeException("Campo Tamanho não pode ser nulo!");
-        }
+
         if (produto.getIngredientes() == null){
-            throw new RuntimeException("Campo Ingredientes não pode ser nulo!");
+            throw new RuntimeException("Preencha o campo PREÇO");
         }
     }
 }

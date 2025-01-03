@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.FetchType.EAGER;
+
 @Entity
 @Getter
 @Setter
@@ -22,19 +27,18 @@ public class Produto {
     @Column(name = "DESCRICAO")
     private String descricao;
 
-    @Column(name = "UNIDADE")
-    private Integer unidade;
-
     @Column(name = "PRECO")
     private Double preco;
 
-    @Column(name = "TAMANHO")
-    private Character tamanho;
 
     @Column(name = "INGREDIENTES")
     private String ingredientes;
 
-
-
+    @ManyToMany(cascade = { CascadeType.MERGE }, fetch = EAGER)
+    @JoinTable(
+            name = "produto_pedido",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "pedido_id"))
+    private List<Pedido> pedidos = new ArrayList<>();
 
 }
