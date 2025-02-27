@@ -71,15 +71,11 @@ public class ProdutoService {
 
     private void validarProduto(Produto produto) {
 
-        if (produto.getDescricao() == null){
-            throw new RuntimeException("Preencha o campo PREÇO");
+        if (produto.getDescricao() == null || produto.getDescricao().isEmpty()) {
+            throw new RuntimeException("Preencha o campo DESCRIÇÃO!");
         }
 
         if (produto.getPreco() == null){
-            throw new RuntimeException("Preencha o campo PREÇO");
-        }
-
-        if (produto.getIngredientes() == null){
             throw new RuntimeException("Preencha o campo PREÇO");
         }
     }

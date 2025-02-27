@@ -60,7 +60,8 @@ ClienteService {
         return clienteList;
     }
 
-    public Cliente alterarCliente (Cliente clienteAlterado, Integer id){
+    public Cliente
+    alterarCliente (Cliente clienteAlterado, Integer id){
         return clienteRepository.findById(id).map(cliente -> {
             cliente.setNome(clienteAlterado.getNome());
             cliente.setTelefone(clienteAlterado.getTelefone());
