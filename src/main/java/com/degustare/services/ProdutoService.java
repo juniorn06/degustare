@@ -61,7 +61,7 @@ public class ProdutoService {
             produto.setDescricao(produtoAlterado.getDescricao());
             produto.setPreco(produtoAlterado.getPreco());
             produto.setIngredientes(produtoAlterado.getIngredientes());
-            return produtoRepository.save(produtoAlterado);
+            return produtoRepository.save(produto);
         }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
