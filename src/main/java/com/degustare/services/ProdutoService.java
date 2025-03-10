@@ -49,7 +49,7 @@ public class ProdutoService {
     }
 
     public List<Produto> obterProdutoPorDescricao(String descricao) {
-        List<Produto> produtoList = produtoRepository.findByDescricao(descricao);
+        List<Produto> produtoList = produtoRepository.findByDescricaoIsContainingIgnoreCase(descricao);
         if (produtoList.isEmpty()){
             throw new RuntimeException("Produto não encontrado!");
         }

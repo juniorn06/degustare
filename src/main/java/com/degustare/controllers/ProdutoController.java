@@ -36,7 +36,7 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtoService.obterProdutos());
     }
 
-    @GetMapping("/obterProdutoPorDescricao{nome}")
+    @GetMapping("/obterProdutoPorDescricao/{nome}")
     public ResponseEntity<List> obterProdutoPorDescricao(@PathVariable String nome){
         return ResponseEntity.ok().body(produtoService.obterProdutoPorDescricao(nome));
     }

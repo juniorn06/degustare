@@ -1,5 +1,6 @@
 package com.degustare.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class Produto {
     @Column(name = "INGREDIENTES")
     private String ingredientes;
 
+    @JsonIgnore
     @ManyToMany(cascade = { CascadeType.MERGE }, fetch = EAGER)
     @JoinTable(
             name = "produto_pedido",
