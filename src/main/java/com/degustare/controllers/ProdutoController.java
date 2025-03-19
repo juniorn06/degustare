@@ -45,4 +45,9 @@ public class ProdutoController {
     public ResponseEntity<Produto> alterarProduto(@PathVariable Integer id, @RequestBody Produto produto){
         return ResponseEntity.ok().body(produtoService.alterarProduto(produto, id));
     }
+
+    @DeleteMapping(path = "/deletarProduto/{id}")
+    public void deletarProduto(@PathVariable Long id){
+        produtoService.deletarProduto(Math.toIntExact(id));
+    }
 }

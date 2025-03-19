@@ -65,7 +65,8 @@ public class ProdutoService {
         }).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    public void deletarProduto(Produto produto) {
+    public void deletarProduto(Integer id) {
+         Produto produto = produtoRepository.findById(id).orElseThrow(()-> new RuntimeException("Cliente não encontrado no id: " + id));
          produtoRepository.delete(produto);
     }
 
