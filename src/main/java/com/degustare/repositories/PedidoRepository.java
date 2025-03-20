@@ -10,5 +10,9 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
+    Pedido findById(int id);
+
+    List<Pedido> findByDescricaoContainingIgnoreCase(String descricao);
+
     //List<Pedido> findByDescricao(String descricao);
 }

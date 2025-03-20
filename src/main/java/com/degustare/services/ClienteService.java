@@ -53,7 +53,7 @@ ClienteService {
     }
 
     public List<Cliente> findByNome(String nome){
-        List<Cliente> clienteList = clienteRepository.findByNome(nome);
+        List<Cliente> clienteList = clienteRepository.findByNomeIsContainingIgnoreCase(nome);
         if (clienteList.isEmpty()){
             throw new RuntimeException("Cliente não encontrado!");
         }
