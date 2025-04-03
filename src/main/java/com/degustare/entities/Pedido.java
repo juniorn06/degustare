@@ -24,9 +24,6 @@ public class Pedido {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "TOTAL")
-    private Double total;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CLIENTE_ID")
     private Cliente cliente;
@@ -37,5 +34,8 @@ public class Pedido {
             joinColumns = @JoinColumn(name = "pedido_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> produtos = new ArrayList<>();
+
+    @Column(name = "TOTAL")
+    private Double total;
 
 }

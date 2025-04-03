@@ -9,6 +9,7 @@ import com.degustare.exceptions.validarException;
 import com.degustare.repositories.ClienteRepository;
 import com.degustare.repositories.PedidoRepository;
 import com.degustare.repositories.ProdutoRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,13 +73,26 @@ public class PedidoService {
         return pedidoOpt.get();
     }
 
-    public List<Pedido> obterPedidosPorDescricao(String descricao){
-        List<Pedido> pedidosList = pedidoRepository.findByDescricaoContainingIgnoreCase(descricao);
-        if (pedidosList.isEmpty()){
+//    public List<Pedido> obterPedidosPorCliente(Cliente cliente){
+//        List<Pedido> pedidosList = pedidoRepository.findByCliente(cliente);
+//        if (pedidosList.isEmpty()){
+//            throw new RuntimeException("Pedido não encontrado!");
+//        }
+//        return pedidosList;
+//    }
+
+    public List<Pedido> obterPedidosPorProduto(Produto produto) {
+        String hql = "FROM Pedido p JOIN p.produtos pr WHERE pr = :produto";
+        EntityManager entityManager = null;
+        List<Pedido> pedidosList = entityManager.createQuery(hql, Pedido.class)
+                .setParameter("produto", produto)
+                .getResultList();
+        if (pedidosList.isEmpty()) {
             throw new RuntimeException("Pedido não encontrado!");
         }
         return pedidosList;
     }
+
 
     public Pedido alterarPedido(Pedido pedidoAlterado, Integer id) {
         return pedidoRepository.findById(id).map(pedido -> {
